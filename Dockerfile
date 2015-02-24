@@ -1,4 +1,4 @@
-FROM alpinelinux/base:latest
+FROM gliderlabs/alpine:latest
 
 ENV ES_PKG_NAME elasticsearch-1.4.2
 
@@ -6,7 +6,7 @@ ENV ES_PKG_NAME elasticsearch-1.4.2
 RUN \
   apk update && \
   apk add openjdk7-jre-base
-  
+
 # Install ElasticSearch.
 RUN \
   cd / && \
