@@ -5,12 +5,13 @@ ENV ES_PKG_NAME elasticsearch-1.4.4
 # Install java
 RUN \
   apk update && \
-  apk add openjdk7-jre-base
+  apk add openjdk7-jre-base && \
+  apk add wget
 
 # Install ElasticSearch.
 RUN \
   cd / && \
-  wget http://s3.amazonaws.com/replicated-cdn/elasticsearch/$ES_PKG_NAME.tar.gz && \
+  wget https://download.elasticsearch.org/elasticsearch/elasticsearch/$ES_PKG_NAME.tar.gz && \
   tar xvzf $ES_PKG_NAME.tar.gz && \
   rm -f $ES_PKG_NAME.tar.gz && \
   mv /$ES_PKG_NAME /elasticsearch
