@@ -1,6 +1,6 @@
 FROM gliderlabs/alpine:latest
 
-ENV ES_PKG_NAME elasticsearch-1.4.2
+ENV ES_PKG_NAME elasticsearch-1.4.4
 
 # Install java
 RUN \
