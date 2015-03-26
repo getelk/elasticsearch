@@ -1,20 +1,10 @@
-FROM gliderlabs/alpine:latest
+FROM jeanblanchard/busybox-java:java7
 
-ENV ES_PKG_NAME elasticsearch-1.4.4
-
-# Install java
-RUN \
-  apk update && \
-  apk add openjdk7-jre-base && \
-  apk add wget
+ENV ES_PKG_NAME elasticsearch-1.5.0
 
 # Install ElasticSearch.
-RUN \
-  cd / && \
-  wget --no-check-certificate https://download.elasticsearch.org/elasticsearch/elasticsearch/$ES_PKG_NAME.tar.gz && \
-  tar xvzf $ES_PKG_NAME.tar.gz && \
-  rm -f $ES_PKG_NAME.tar.gz && \
-  mv /$ES_PKG_NAME /elasticsearch
+RUN wget --no-check-certificate http://download.elasticsearch.org/elasticsearch/elasticsearch/$ES_PKG_NAME.tar.gz -O /tmp/elasticsearch.tar.gz
+RUN gunzip /tmp/elasticsearch.tar.gz && tar xvf /tmp/elasticsearch.tar -C /opt && mv /opt/$ES_PKG_NAME /elasticsearch && rm -rf /tmp/elasticsearch.tar
 
 # Define mountable directories.
 VOLUME ["/data"]
@@ -30,5 +20,8 @@ WORKDIR /data
 #   - 9300: transport
 EXPOSE 9200
 EXPOSE 9300
+
+WORKDIR /elasticsearch
+RUN bin/plugin -install elasticsearch/elasticsearch-cloud-aws/2.5.0
 
 ENTRYPOINT ["/elasticsearch/bin/elasticsearch"]

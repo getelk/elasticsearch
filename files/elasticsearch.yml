@@ -1,7 +1,7 @@
 path:
   data: /data/data
   logs: /data/log
-  plugins: /data/plugins
+  plugins: /elasticsearch/plugins
   work: /data/work
 http.cors.enabled: true
 http.cors.allow-origin: http://{{ ConfigOption "hostname" }}
