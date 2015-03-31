@@ -4,4 +4,4 @@ path:
   plugins: /elasticsearch/plugins
   work: /data/work
 http.cors.enabled: true
-http.cors.allow-origin: /https?:\/\/{{ ConfigOption "hostname" }}(:[0-9]+)?/
+http.cors.allow-origin: /https?:\/\/{{repl ConfigOption "hostname" }}(:[0-9]+)?/
